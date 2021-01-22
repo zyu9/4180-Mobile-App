@@ -25,8 +25,8 @@ public class MainPart1 {
         }
 
         //Find and Print the Top 10 users
-        for(int i = 0; i < al.size(); i++) {
-            Collections.sort(al, User.compareAge(al.get(i), al.get(i+1)));
+        for(int i = 0; i < al.size(); i++){
+            Collections.sort(al);
         }
 
         System.out.println("\nTop 10 oldest users: ");

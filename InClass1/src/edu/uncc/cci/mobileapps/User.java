@@ -1,6 +1,6 @@
 package edu.uncc.cci.mobileapps;
 
-public class User {
+public class User implements Comparable<User>{
     String firstname, lastname, email, gender, city, state;
     int age;
 
@@ -21,7 +21,9 @@ public class User {
         this.state =  items[6];
     }
 
-    public static int compareAge(User a, User b){
-        return a.age - b.age;
+    public int compareTo(User o){
+        return -1 * (this.age - o.age);
     }
+
+    public static boolean compareState(User a, User b){return a.state.equals(b.state);}
 }

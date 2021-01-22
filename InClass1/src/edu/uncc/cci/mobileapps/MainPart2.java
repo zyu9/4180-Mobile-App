@@ -1,5 +1,7 @@
 package edu.uncc.cci.mobileapps;
 
+import java.util.*;
+
 public class MainPart2 {
     /*
     * Question 2:
@@ -11,12 +13,37 @@ public class MainPart2 {
     * */
 
     public static void main(String[] args) {
+        int count = 0;
+        //Create HashMap, should have state as Key, count as value
+        HashMap<String, Integer> state = new HashMap<>();
 
-        //example on how to access the Data.users array.
-        // for (String str : Data.users) {
-         //   System.out.println(str);
-        //}
+        //Create ArrayList and store the data
+        ArrayList<User> al = new ArrayList<>();
+        for (String i : Data.users){
+            al.add(new User(i));
+        }
 
+        //Find the count for each state
+        for (int i = 0; i < al.size(); i++) {
+            //Compare state, if equal then count++
+            if(User.compareState(al.get(i), al.get(i+1))){
+                count++;
+            }
+        }
 
+        //Store data for hashmap
+        for (User user : al) {
+            //Store state as Key, Store count as value
+            state.put(user.state, count);
+        }
+
+        //Sort in ASC order by key
+        ArrayList<String> stateByKey = new ArrayList<>(state.keySet());
+        Collections.sort(stateByKey);
+
+        //To print Key and value
+        for(String i : stateByKey){
+            System.out.println("State & Count: " + i);
+        }
     }
 }
