@@ -1,6 +1,6 @@
 package edu.uncc.cci.mobileapps;
 
-import java.util.HashSet;
+import java.util.*;
 
 public class MainPart3 {
     /*
@@ -12,20 +12,40 @@ public class MainPart3 {
     * */
 
     public static void main(String[] args) {
-        //example call
-        //int[] input = {}; // output {}
-        //int[] input = {1}; // output {1}
-        //int[] input = {1,2,3,4}; // output {1,2,3,4}
-        //int[] input = {1,2,3,4,4,4,4,4,5,6}; // output {1,2,3,4}
-        //int[] input = {1,2,3,-1,4,5,8,20,25,1,1,4,6}; // output {-1,4,5,8,20,25}
-        //int[] input = {1,2,3,1,1,1,2,3,4,1,1,2,4,6,7}; // output{1,2,4,6,7}
-        int[] input = {1,2,3,2,5,2,4,6,7}; // output {2,4,6,7}
-        int[] result = printLongestSequence(input);
+        //Create hash sets and store data
+        HashSet<User> user = new HashSet<>();
+        HashSet<User> otherUser = new HashSet<>();
+        HashSet<User> sameUser = new HashSet<>();
+
+        for (String i : Data.users){
+            user.add(new User(i));
+        }
+        for (String i : Data.otherUsers){
+            otherUser.add(new User(i));
+        }
+
+        for(User i : user){
+            for(User j : otherUser){
+                if(User.compareUser(i, j)){
+                    //Have the same user
+                    sameUser.add(i);
+                }
+            }
+        }
+
+        ArrayList<User> sameUserList = new ArrayList<>(sameUser);
+
+        //Sort the sameUser by state
+        Collections.sort(sameUserList, new Comparator<User>() {
+            @Override
+            public int compare(User o1, User o2) {
+                return -1 * (o1.state.compareToIgnoreCase(o2.state));
+            }
+        });
+
+        sameUser = new LinkedHashSet<>(sameUserList);
+        System.out.println(sameUser);
+
     }
 
-    public static int[] printLongestSequence(int[] input){
-        int[] result = {};
-
-        return result;
-    }
 }
